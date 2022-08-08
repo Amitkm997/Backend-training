@@ -34,5 +34,73 @@ router.get('/student-details/:name', function(req, res){
     
     res.send('Dummy response')
 })
+   //problem statements
+   //problem-1
+//    console.log("problem-1")
+   router.get('/movies',function(req,res){
+       let movie=["Tiger Zinda hai","Tarzan the wonder car","Border"]
+       res.send(movie);
+   })
+   
+   //problem-2
+   router.get('/movies/:indexNumber',function(req,res){
+    let movie=["Tiger Zinda hai","Tarzan the wonder car","Border"]
+    let a=req.params.indexNumber-1;
+    for(let i=0;i<movie.length;i++){
+        if(a==i){
+             console.log(movie[i]);
+        }
+    }
+    //problem-3
+    if(a>movie.length){
+        console.log("not a valid input")
+    }
+ })
+ //problem-4
+
+ router.get('/films',function(req,res){
+       const films=
+       [ {
+        id: 1,
+        name: "The Shining"
+       }, {
+        id: 2,
+        name: "Incendies"
+       }, {
+        id: 3,
+        name: "Rang de Basanti"
+       }, {
+        id: 4,
+        name: "Finding Nemo"
+       }]
+       res.send(films);
+    })
+       //problem-5
+    router.get('/films/:filmId',function(req,res){
+        const films=
+        [ {
+         id: 1,
+         name: "The Shining"
+        }, {
+         id: 2,
+         name: "Incendies"
+        }, {
+         id: 3,
+         name: "Rang de Basanti"
+        }, {
+         id: 4,
+         name: "Finding Nemo"
+        }]
+        let b=req.params.indexNumber-1;
+        for(let i=0;i<films.length;i++){
+            if(films[i]==b){
+                 console.log(films[i]);
+            }
+        }
+
+
+    })
+
+
 
 module.exports = router;

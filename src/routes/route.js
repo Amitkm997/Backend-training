@@ -46,14 +46,16 @@ router.get('/student-details/:name', function(req, res){
    router.get('/movies/:indexNumber',function(req,res){
     let movie=["Tiger Zinda hai","Tarzan the wonder car","Border"]
     let a=req.params.indexNumber-1;
-    for(let i=0;i<movie.length;i++){
-        if(a==i){
-             console.log(movie[i]);
-        }
-    }
+    // for(let i=0;i<movie.length;i++){
+    //     if(a==i){
+    //         return res.send(movie[i]);
+    //     }
+    // }
+     res.send(movie[a]);
+
     //problem-3
-    if(a>movie.length){
-        console.log("not a valid input")
+    if(a>movie.length || a<0){
+        res.send("not a valid input")
     }
  })
  //problem-4
@@ -91,12 +93,13 @@ router.get('/student-details/:name', function(req, res){
          id: 4,
          name: "Finding Nemo"
         }]
-        let b=req.params.indexNumber-1;
+        let b=req.params.filmId;
         for(let i=0;i<films.length;i++){
-            if(films[i]==b){
-                 console.log(films[i]);
+            if(films[i].id==b){
+                 return res.send(films[i])
             }
         }
+        res.send("The filmid does't exist")
 
 
     })

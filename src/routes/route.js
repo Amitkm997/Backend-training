@@ -108,18 +108,73 @@ let players =
    router.post('/players', function (req, res) {
 
        //LOGIC WILL COME HERE
-       
+       let isNameRepeated=false;   
+       let newPlayer= req.body;
        for (let i=0;i<players.length;i++){
-        if(players[i].name==req.body.name){
+        if(players[i].name==newPlayer.name){
+             isNameRepeated=true
+             break;
+        }
+        }
+        //we will be taking the input from the postman e.g. req.body
+        //
+        if(isNameRepeated){
              res.send("Your name already exit so you are not allowed to enter your details");
-        }
-        }
-        players.push(req.body)
+        }else
+        {
+        players.push(newPlayer)
             res.send(  { data: players , status: true }  )
-    
+    }
    })
-  
+
+   router.get('/guery-params',function(req,res){
+    let arr=[1,2,3,22,344,5667,3,32,233,45,]
+    input=req.query.input;
+    let newArray=arr.filter(a =>a>input);
+    res.send({data:newArray,status:true})
+   })
+   //voting problems
+   
+// let result=
 
 
 
+router.post('/Voting',function(req,res){
+    let person=[
+        {
+            name:"Amit kumar",
+            age:10,
+            votingStatus:false
+        },
+        {
+            name:"Sumit pal",
+            age:20,
+            votingStatus:false
+        },
+        {
+            name:"Avneesh pal",
+            age:70,
+            votingStatus:false
+        },
+        {
+            name:"Aryan Yadav",
+            age:5,
+            votingStatus:false
+        },
+        {
+            name:"Nidhi singhs",
+            age:40,
+            votingStatus:false
+        }]
+    inputAge=req.query.votingAge;
+    person.map(per => (per.age>inputAge)?per.votingStatus=true:per.votingStatus);
+    // for(let i=0;i<person.length;i++){
+    // if(person[i].age>inputAge){
+    //     person[i].votingStatus=true;
+    // }
+    //   }
+    let final=person.filter(pson=>{if(pson.votingStatus==true) {return pson.name}});
+    res.send({data:final});
+ 
+})
 module.exports = router;

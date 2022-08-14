@@ -25,20 +25,6 @@ const userSchema = new mongoose.Schema( {
 module.exports = mongoose.model('User', userSchema) //users
 
 
-//assignment 
-const bookSchema = new mongoose.Schema({
-    bookName :
-    {
-        type:String,
-        require:true,
-        unique:true
-    },
-    AurhorName:String,
-    Cotegory:String,
-    Year:String
-},{timestamp:true});
-
-module.exports=mongoose.model('books',bookSchema);
 
 
 

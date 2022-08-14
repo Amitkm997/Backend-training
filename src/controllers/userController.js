@@ -1,3 +1,4 @@
+const BooksModel = require("../models/BooksModel")
 const userModel = require("../models/userModel")
 const UserModel= require("../models/userModel")
 
@@ -18,12 +19,12 @@ module.exports.getUsersData= getUsersData
 
 const CreateBooks= async function(req,res){
     let Books=req.body 
-    let saveBooks=await UserModel.create(Books); 
+    let saveBooks=await BooksModel.create(Books); 
     res.send({msg:saveBooks});
 }
 
 const getBooks=async function(req,res){
-    let AllBooks=await userModel.find();
+    let AllBooks=await BooksModel.find();
     res.send({msg:AllBooks});
 }
  

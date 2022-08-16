@@ -10,8 +10,18 @@ const bookSchema = new mongoose.Schema({
     },
     AurhorName:String,
     Cotegory:String,
-    Year:String
-},{timestamp:true});
+    Year:Number,
+    tags:["nodejs","mongoDB"],
+    sale:{
+        type:String,
+        default:20
+    },
+    prices:{
+        indianPrice:String,
+        europePrice:String
+    }
+},{timestamps: true});
+
 
 module.exports=mongoose.model('books',bookSchema);
 

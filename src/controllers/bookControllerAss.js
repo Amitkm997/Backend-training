@@ -25,7 +25,7 @@ const getBooksInYear=async function (req,res){
 }
 //getXINRBooks
 const getXINRBooks=async function (req,res){
-    saal=req.query.year;
+    // saal=req.query.year;
     let getXINRBooks1= await BookModel.find({$or :[{indianPrice:"100INR"},{indianPrice:"200INR"}]});
     res.send({msg:getXINRBooks1});
 }
@@ -35,6 +35,19 @@ const getRandomBooks=async function (req,res){
     let getRandomBooks1= await BookModel.find({$or :[{stockAvailable:true},{totalPages:{$gt : 500}}]});
     res.send({msg:getRandomBooks1});
 }
+//getParticularBooks
+const getParticularBooks=async function(req,res){
+    const getParticularBooks1=await BookModel.find(req.body);
+    res.send({BookData:getParticularBooks1});
+ }
+
+ //selfPractice
+ const selfPractice=async function(req,res){
+    pages=req.query.page
+    const selfPractice1=await BookModel.find().skip(2*(pages-1)).limit(3);
+    res.send({BookData:selfPractice1});
+
+ }
 //export
 module.exports.creatBookAssig=creatBookAssig;
 module.exports.getBooksDataAssig=getBooksDataAssig;
@@ -42,3 +55,5 @@ module.exports.bookList=bookList;
 module.exports.getBooksInYear=getBooksInYear;
 module.exports.getXINRBooks=getXINRBooks;
 module.exports.getRandomBooks=getRandomBooks;
+module.exports.getParticularBooks=getParticularBooks;
+module.exports.selfPractice=selfPractice;

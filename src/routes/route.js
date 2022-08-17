@@ -29,4 +29,12 @@ router.post("/getBooksInYear",bookControllerAssig.getBooksInYear);
 router.get("/getXINRBooks",bookControllerAssig.getXINRBooks);
 // getRandomBooks
 router.get("/getRandomBooks",bookControllerAssig.getRandomBooks);
+//getParticularBooks
+router.post("/getParticularBooks",bookControllerAssig.getParticularBooks);
+
+//self practice
+router.get("/selfPractice",bookControllerAssig.selfPractice);
+
+
+
 module.exports = router;

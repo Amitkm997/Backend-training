@@ -1,11 +1,7 @@
 {
   "name": "src",
   "version": "1.0.0",
-<<<<<<< HEAD
   "description": "Backend cohort for Plutonium(Jul-Nov)",
-=======
-  "description": "Backend cohort",
->>>>>>> 786abc45b56b223f223c9a7b4bba80ab59b0cdd2
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

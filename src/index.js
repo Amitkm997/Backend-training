@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const route = require('./routes/route.js');
 const { default: mongoose } = require('mongoose');
+const { ConnectionCheckedOutEvent } = require('mongodb');
 const app = express();
 
 app.use(bodyParser.json());
@@ -20,6 +21,24 @@ app.use (
         next();
   }
   );
+
+  //assignment 
+  const assignmentMiddleware=function(req,res,next){
+    //to print timeStamps
+    const current=new Date();
+    var dateTime=current.getDate()+' '
+                 +current.getMonth()+' '
+                 +current.getFullYear()+' '
+                 +current.getHours()+' '
+                 +current.getMinutes()+' '
+                 +current.getSeconds()+' '
+    var getIp=req.ip;
+    var getUrl=req.originalUrl;
+
+    console.log(`${dateTime}  ${getIp}  ${getUrl}`)
+    next();
+  }
+  app.use(assignmentMiddleware)
 
 app.use('/', route);
 

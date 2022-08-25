@@ -9,8 +9,9 @@ router.get("/test-me", function (req, res) {
     res.send("My first ever api!")
 })
 
-//assignment
-router.post("/createUser", UserController.createUser)
+
+router.post("/createUser",validationMiddleware.validation ,UserController.createUser)
+router.post("/productModel",validationMiddleware.validation,productController.productModel)
 
 
 

@@ -16,16 +16,33 @@ mongoose.connect("mongodb+srv://Daniel997:0C3UNDypy94fmHDP@cluster0.zyocpul.mong
 
 
 
-app.use('/', route);
 
-app.use (
-    function (req, res, next) {
-        console.log ("inside GLOBAL MW");
-        res.send({msg:"done"})
+
+// app.use (
+//     function (req, res, next) {
+//         console.log ("inside GLOBAL MW");
+//         res.send({msg:"done"})
+//   }
+//   );
+
+const assignmentMiddleware=function(req,res,next){
+    //to print timeStamps
+    const current=new Date();
+    var dateTime=current.getDate()+':'
+                 +current.getMonth()+':'
+                 +current.getFullYear()+'  '
+                 +current.getHours()+':'
+                 +current.getMinutes()+':'
+                 +current.getSeconds()+':'
+    var getIp=req.ip;
+    var getUrl=req.originalUrl;
+
+    console.log(`${dateTime}  ${getIp}  ${getUrl}`)
+    next();
   }
-  );
+  app.use(assignmentMiddleware);
 
-
+  app.use('/', route);
 app.listen(process.env.PORT || 3000, function () {
     console.log('Express app running on port ' + (process.env.PORT || 3000))
 });

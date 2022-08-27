@@ -4,6 +4,7 @@ const router = express.Router();
 const UserController= require("../controllers/userController")
 const productController=require("../controllers/productController")
 const validationMiddleware=require("../middlewares/commonMiddlewares")
+const orderController= require("../controllers/orderController")
 
 
 
@@ -16,12 +17,10 @@ router.get("/test-me", function (req, res) {
 router.post("/createUser",validationMiddleware.validation, UserController.createUser)
 router.post("/productModel",validationMiddleware.validation, productController.createProduct)
 
+router.post("/createOrder",validationMiddleware.validation,validationMiddleware.validateUserId, orderController.createOrder)
 
 
-
-
-
-
+module.exports = router;
 
 
 
@@ -71,4 +70,3 @@ router.post("/productModel",validationMiddleware.validation, productController.c
 
 
 
-module.exports = router;

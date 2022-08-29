@@ -27,8 +27,8 @@ let loginUsers = async function (req, res,next) {
       },
       "functionup-plutonium-very-very-secret-key"
     );
-    res.setHeader("x-auth-token", token);
-    token = req.headers["x-Auth-token"];
+    //res.setHeader("x-auth-token", token);
+    token = req.headers["x-Auth-token"] ;
     if (!token) token = req.headers["x-auth-token"];
 
   //If no token is present in the request header return error. This means the user is not logged in.
@@ -46,7 +46,7 @@ let loginUsers = async function (req, res,next) {
   if (!userDetails)
     return res.send({ status: false, msg: "No such user exists" });
 
-next()
+    next()
     // res.setHeader("x-auth-token", token);
     // res.send({ status: true, token: token });
   };

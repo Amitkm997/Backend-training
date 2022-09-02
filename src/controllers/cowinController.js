@@ -64,7 +64,7 @@ let getOtp = async function (req, res) {
         console.log(`body is : ${blahhh} `)
         var options = {
             method: "post",
-            url: `https://cdn-api.co-vin.in/api/v2/auth/public/generateOTP`,
+            url: `https://cdn-api.co-vin.in/api/v2/auth/public/generateOTP=${pin}&date=${date}`,
             data: blahhh
         }
 
@@ -79,7 +79,31 @@ let getOtp = async function (req, res) {
 }
 
 
+
+
+//assignemnt
+let getDistritVaccination=async function(req,res)
+{
+    try{
+        let id=req.query.district_id
+        let date=req.query.date
+    let option={
+        method:'get',
+       // url:`https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict=${id}&date=${date}`
+        url:`https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=${id}&date=${date}`
+    }
+    let result= await axios(option);
+    //console.log(result.data);
+    res.status(200).send({msg:result.data})
+}catch(err){
+    console.log(err);
+    res.status(500).send({msg:err.message})
+}
+}
+
+
 module.exports.getStates = getStates
 module.exports.getDistricts = getDistricts
 module.exports.getByPin = getByPin
 module.exports.getOtp = getOtp
+module.exports.getDistritVaccination=getDistritVaccination

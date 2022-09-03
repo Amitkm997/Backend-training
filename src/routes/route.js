@@ -25,6 +25,6 @@ router.get("/getBooksData", bookController.getBooksData)
 router.get("/getBooksWithAuthorDetails", bookController.getBooksWithAuthorDetails)
 
 //
-router.put("/updateBook", bookController.updateBook)
+router.put("/updateBook", bookController.updateSpecificBooks)
 
 module.exports = router;

@@ -43,26 +43,24 @@ const getBooksWithAuthorDetails = async function (req, res) {
 }
 
 //updation
-const updateBook= async function(req,res){
-    //part a
-    //find all the books by publishers =penguin and x,
-    //update these books - isHardCover =true
-    const allPublisher=await publisherModel.find({name:{$in:['Penguin','HarperCoolins']}},{_id: 1});
-    res.send({data:allPublisher});
-    // const update1=bookModel.updateMany({publisher:allPublisher},{$set:{isHardCover:true}})
 
-// For the books written by authors having a rating
-//  greater than 3.5, update the books price by 10
-//   (For eg if old price for such a book is 50, new will be 60) 
-//    const allAuthor=await authorModel.find({rating:{$gt:3.5}});
-//    const update2=await bookModel.updateMany({author:allAuthor},{$inc:{price:10}})
+const updateSpecificBooks = async function(req, res) {
+    //a)
+    // get books by the publioshers - Penguin and HarperCollins
+    let requiredPublishers = 
+    await publisherModel.find({$or: [{name: "Penguin"},{name: "HarperCollins"}]}, {_id: 1})
+    //let books = await bookModel.find().populate('publisher')
+    //for
+    let requiredPublisherIds = [] 
+    for (let i = 0; i < requiredPublishers.length; i++) {
+        requiredPublisherIds.push(requiredPublishers[i]._id)
+    }
 
-//  res.send({data: [update1,update2]});
-
+    let updatedBooks = await bookModel.updateMany({publisher : {$in: requiredPublisherIds}}, {isHardCover: true}, {new: true})
+    res.send({data: updatedBooks})
 }
-
 //exportation
 module.exports.createBook= createBook
 module.exports.getBooksData= getBooksData
 module.exports.getBooksWithAuthorDetails = getBooksWithAuthorDetails
-module.exports.updateBook = updateBook
+module.exports.updateSpecificBooks = updateSpecificBooks
